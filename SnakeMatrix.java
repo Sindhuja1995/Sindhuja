@@ -1,4 +1,4 @@
-package AssignmentClasses;
+
 import java.util.*; 
 public class SnakeMatrix {
 	    static void print(int [][] matrix) 
