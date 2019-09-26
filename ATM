@@ -1,1 +1,498 @@
+package ATM;
+
+import java.util.Scanner;
+
+public class AccountMain {
+
+	    public static void selectAccount(){
+
+
+	        System.out.println("Which account would you like to access?");
+	        System.out.println();
+	        System.out.println("1 = Business Account ");
+	        System.out.println("2 = Savings Account");
+	        System.out.println("3 = Checkings Account");
+	        System.out.println("4 = Return to Main Menu");
+
+	        menuAccount();
+	    }
+
+	    public static void menuAccount(){
+
+	        BankMain main = new BankMain();
+	        BankMainSub sub = new BankMainSub();
+	   //     BankMainPart3 main5 = new BankMainPart3();
+
+	        Scanner account = new Scanner(System.in);
+	        while (!account.hasNextInt()) {
+	            System.out.println("Invalid choice.");
+	            selectAccount();
+	        }
+	        int actNum = account.nextInt();
+
+
+	        if (actNum == 1){
+
+	            System.out.println("*Business Account*");
+	            sub.businessAccount();
+	        }
+
+	        else if (actNum == 2){
+
+	            System.out.println("*Savings Account*");
+	            main.drawMainMenu();
+	        }
+
+	        else if (actNum == 3){
+
+	            System.out.println("*Checkings Account*");
+	        //    main5.checkingsAccount();
+	        }
+
+	        else if (actNum == 4){
+	            BankMain.menu();
+
+	        }
+	    }
+	
+	
+}
+
+
+
+package ATM;
+
+
+	public class BankMainSub extends BankMain {
+
+	    private double availableBal3 =500;
+	    private double totalBal3 =520;
+
+	    public void businessAccount()
+	    {
+	        int selection;
+
+	        System.out.println("\nATM main menu:");
+	        System.out.println("1 - View account balance");
+	        System.out.println("2 - Withdraw funds");
+	        System.out.println("3 - Add funds");
+	        System.out.println("4 - Back to Account Menu");
+	        System.out.println("5 - Terminate transaction");
+	        System.out.print("Choice: ");
+	        selection = input.nextInt();
+
+	        switch(selection)
+	        {
+	        case 1:
+	            viewAccountInfo3();
+	            break;
+	        case 2:
+	            withdraw3();
+	            break;
+	        case 3:
+	            addFunds3();
+	            break;
+	        case 4:
+	            AccountMain.selectAccount();
+	            break;
+	        case 5:
+	            System.out.println("Thank you for using this ATM!!! goodbye");
+	         default:             
+	                System.out.println("Invalid choice.");
+	                businessAccount();
+
+	        }
+	            }
+
+
+	    public void addFunds3()
+	    {
+	        int addSelection;
+
+	        System.out.println("Deposit funds:");
+	        System.out.println("1 - $20");
+	        System.out.println("2 - $40");
+	        System.out.println("3 - $60");
+	        System.out.println("4 - $100");
+	        System.out.println("5 - Back to main menu");
+	        System.out.print("Choice: ");
+	        addSelection = input.nextInt();
+
+	        switch(addSelection)
+	        {
+	        case 1:
+	            deposit2(20);
+	            businessAccount();
+	            break;
+	        case 2:
+	            deposit2(40);
+	            businessAccount();
+	            break;
+	        case 3:
+	            deposit2(60);
+	            businessAccount();
+	            break;
+	        case 4:
+	            deposit2(100);
+	            businessAccount();
+	            break;
+	        case 5:
+	            businessAccount();
+	            break;
+	        }
+	    }
+
+	    public void withdraw3()
+	    {
+	        int withdrawSelection;
+
+	        System.out.println("Withdraw money:");
+	        System.out.println("1 - $20");
+	        System.out.println("2 - $40");
+	        System.out.println("3 - $60");
+	        System.out.println("4 - $100");
+	        System.out.println("5 - Back to main menu");
+	        System.out.print("Choice: ");
+	        withdrawSelection =input.nextInt();
+
+	        switch(withdrawSelection)
+	        {
+	        case 1:
+	            checkNsf3(20);
+	            businessAccount();
+	            break;
+	        case 2:
+	            checkNsf3(40);
+	            businessAccount();
+	            break;
+	        case 3:
+	            checkNsf3(60);
+	            businessAccount();
+	            break;
+	        case 4:
+	            checkNsf3(100);
+	            businessAccount();
+	            break;
+	        case 5:
+	            businessAccount();
+	            break;
+	        }
+	    }
+
+	    public void viewAccountInfo3()
+	    {
+
+	        System.out.println("Account Information:");
+	        System.out.println("\t--Total balance: $"+totalBal3);
+	        System.out.println("\t--Available balance: $"+availableBal3);
+	        businessAccount();
+	    }
+
+	    public void deposit2(int depAmount)
+	    {
+	        System.out.println("\n***Please insert your money now...***");
+	        totalBal3 =totalBal3 +depAmount;
+	        availableBal3 =availableBal3 +depAmount;
+	    }
+
+	    public void checkNsf3(int withdrawAmount)
+	    {
+	        if(totalBal3 -withdrawAmount < 0)
+	            System.out.println("\n***ERROR!!! Insufficient funds in you accout***");
+	        else
+	        {
+	            totalBal3 =totalBal3 -withdrawAmount;
+	            availableBal3 =availableBal3 -withdrawAmount;
+	            System.out.println("\n***Please take your money now...***");
+	            }
+	    }
+	}
+	
+
+package ATM;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+	    public class BankMain
+	    {
+	        private double availableBal =80;
+	        private double totalBal =100;
+
+	        static ArrayList<Integer> cardNum = new ArrayList<Integer>();
+	        static Scanner input = new Scanner(System.in);
+
+	        private String error;           //String the error from the exception
+	        {
+	            error = "error";
+	        }
+	        public static void cardNumbers(){
+	            Scanner input = new Scanner(System.in);
+	            try{
+
+	            System.out.println("Please select a 5 digit card number");
+	            int num = input.nextInt(); 
+	            checkNumber(num);
+	            }
+	            catch(invalidNumber err){
+
+	                System.out.println("Caught Error: " + err.getError());
+	                contC();    
+	            }
+	    }
+	            public static void contC(){
+	                Scanner keyboard = new Scanner(System.in);
+	                System.out.println("Type 'c' to enter number again.");
+
+	                String value = keyboard.next();
+	                if(value.equalsIgnoreCase("c")){
+	                    cardNumbers();
+
+	        }
+
+	        else if (!keyboard.equals('c')){
+
+	            System.out.println("Invalid Entry!");
+	        }
+	}
+	    public static void menu(){
+
+	    System.out.println("ATM Menu:");
+	    System.out.println();
+	    System.out.println("1 = Create Account");
+	    System.out.println("2 = Account Login");
+	    System.out.println("3 = Exit ATM");
+	    query();
+	                }
+
+	        public void startAtm()
+	        {
+	            menu();
+	        }
+	        public void drawMainMenu()
+	        {
+	            AccountMain main3 = new AccountMain();
+	            int selection;
+
+	            System.out.println("\nATM main menu:");
+	            System.out.println("1 - View account balance");
+	            System.out.println("2 - Withdraw funds");
+	            System.out.println("3 - Add funds");
+	            System.out.println("4 - Back to Account Menu");
+	            System.out.println("5 - Terminate transaction");
+	            System.out.print("Choice: ");
+	            selection = input.nextInt();
+
+	            switch(selection)
+	            {
+	            case 1:
+	                viewAccountInfo();
+	                break;
+	            case 2:
+	                withdraw();
+	                break;
+	            case 3:
+	                addFunds();
+	                break;
+	            case 4:
+	                AccountMain.selectAccount();
+	                break;
+	            case 5:
+	                System.out.println("Thank you for using this ATM!!! goodbye");
+	            }
+	        }
+
+	        public void viewAccountInfo()
+	        {
+	            System.out.println("Account Information:");
+	            System.out.println("\t--Total balance: $"+totalBal);
+	            System.out.println("\t--Available balance: $"+availableBal);
+	            drawMainMenu();
+	        }
+
+	        public void deposit(int depAmount)
+	        {
+	            System.out.println("\n***Please insert your money now...***");
+	            totalBal =totalBal +depAmount;
+	            availableBal =availableBal +depAmount;
+	        }
+
+	        public void checkNsf(int withdrawAmount)
+	        {
+	            if(totalBal -withdrawAmount < 0)
+	                System.out.println("\n***ERROR!!! Insufficient funds in you accout***");
+	            else
+	            {
+	                totalBal =totalBal -withdrawAmount;
+	                availableBal =availableBal -withdrawAmount;
+	                System.out.println("\n***Please take your money now...***");
+	                }
+	        }
+
+	        public void addFunds()
+	        {
+	            int addSelection;
+
+	            System.out.println("Deposit funds:");
+	            System.out.println("1 - $20");
+	            System.out.println("2 - $40");
+	            System.out.println("3 - $60");
+	            System.out.println("4 - $100");
+	            System.out.println("5 - Back to main menu");
+	            System.out.print("Choice: ");
+	            addSelection =input.nextInt();
+
+	            switch(addSelection)
+	            {
+	            case 1:
+	                deposit(20);
+	                drawMainMenu();
+	                break;
+	            case 2:
+	                deposit(40);
+	                drawMainMenu();
+	                break;
+	            case 3:
+	                deposit(60);
+	                drawMainMenu();
+	                break;
+	            case 4:
+	                deposit(100);
+	                drawMainMenu();
+	                break;
+	            case 5:
+	                drawMainMenu();
+	                break;
+	            }
+	        }
+
+	        public void withdraw()
+	        {
+	            try{
+
+
+	            int withdrawSelection;
+
+	            System.out.println("Withdraw money:");
+	            System.out.println("1 - $20");
+	            System.out.println("2 - $40");
+	            System.out.println("3 - $60");
+	            System.out.println("4 - $100");
+	            System.out.println("5 - Back to main menu");
+	            System.out.print("Choice: ");
+	            withdrawSelection =input.nextInt();
+
+	            switch(withdrawSelection)
+	            {
+	            case 1:
+	                checkAmount(20);
+	                drawMainMenu();
+	                break;
+	            case 2:
+	                checkAmount(40);
+	                drawMainMenu();
+	                break;
+	            case 3:
+	                checkAmount(60);
+	                drawMainMenu();
+	                break;
+	            case 4:
+	                checkAmount(100);
+	                drawMainMenu();
+	                break;
+	            case 5:
+	                drawMainMenu();
+	                break;
+	             default:             
+	                    System.out.println("Invalid choice.");
+	                    withdraw();
+	            }
+
+	            }
+	            catch(invalidAmount err){
+	                System.out.println("Caught Error: " + err.getError());
+	                viewAccountInfo();
+	            }
+	        }
+
+	public static void query(){
+
+	    Scanner keyboard = new Scanner(System.in);
+
+
+	    while (!keyboard.hasNextInt()) {
+	        System.out.println("Invalid choice.");
+	        menu();
+	    }
+	    int input = keyboard.nextInt();
+
+	    if (input == 2){
+
+	        BankMainPart2 main2 = new BankMainPart2();
+
+	        System.out.println("Please enter your 5 digit card number.");
+	        BankMainPart2.loginCard(cardNum);
+	    }
+	    else if (input == 1){
+
+	        cardNumbers();  
+	    }
+	    else if (input == 3){
+	        System.out.println("Thank you, have a nice day!");
+	        System.exit(0);
+	    }
+	}
+
+
+	private static void checkNumber(int num) throws invalidNumber
+	//run the check activation exception
+	{
+	    Scanner keyboard = new Scanner(System.in);
+
+	    if(String.valueOf(num).length()!=5)
+	  {
+	        throw new invalidNumber("invalid number");
+	  }
+	    else  {
+
+	        cardNum.add(num);
+
+	        System.out.println("Thank you! You're card number is " +num);
+	        contC2();
+	    }
+	}
+	    private void checkAmount(int withdrawAmount) throws invalidAmount
+	    //run the check activation exception
+	    {
+	        if(totalBal -withdrawAmount < 0)
+	        {   
+	            throw new invalidAmount("\n***ERROR!!! Insufficient funds in you accout***");
+	    }
+	    else
+	        {
+	            totalBal =totalBal -withdrawAmount;
+	            availableBal =availableBal -withdrawAmount;
+	            System.out.println("\n***Please take your money now...***");
+	            }
+	    }
+	    public static void contC2(){
+	        Scanner keyboard = new Scanner(System.in);
+	        System.out.println("Type 'c' to return to main menu.");
+
+	        String value = keyboard.next();
+	        if(value.equalsIgnoreCase("c")){
+	        menu();
+	        }
+	        else if (!keyboard.equals('c')){
+	            System.out.println("Invalid Entry!");
+	            contC2();
+	        }
+	    }
+	    public static void main(String args[])
+	    {
+	        BankMain myAtm = new BankMain();
+	        BankMainSub sub = new BankMainSub();
+	        myAtm.startAtm();
+	    }
+	    }
 
